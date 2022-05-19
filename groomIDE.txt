@@ -1,0 +1,439 @@
+from flask import Flask, request, jsonify
+import csv
+import pandas as pd
+
+application = Flask(__name__)
+
+
+@application.route("/")
+def hello():
+    return "Hello goorm!"
+
+#@application.route("/total-public-des")
+#def 
+
+@application.route("/housing-welfare", methods=['POST'])
+def housing_welfare():
+    req = request.get_json()
+    
+    welfare_info_house = pd.read_csv("./data/welfare_info/housing_welfare_service.csv")
+    
+    #json 파일 읽기
+    house_welfare = req["action"]["detailParams"]["welfare_type"]["value"]
+    
+    answer = house_welfare
+    
+    
+    #답변 텍스트 설정
+    res = {
+  "version": "2.0",
+  "template": {
+    "outputs": [
+        {
+            "simpleText": {
+                "text": "10가지의 주거복지 서비스가 존재합니다. 원하시는 서비스를 선택하세요"
+            }
+          },
+      {
+        "carousel": {
+          "type": "itemCard",
+          "items": [
+            {
+              "imageTitle": {
+                "title": "통합공공임대주택",
+                "imageUrl" : ""
+              },
+              "itemList": [
+                {
+                  "title": "설명",
+                  "description": welfare_info_house.iloc[0]['describe']
+                },
+                {
+                  "title": "임대기간",
+                  "description": welfare_info_house.iloc[0]['term']
+                },
+                {
+                  "title" : "전용면적",
+                  "description" : welfare_info_house.iloc[0]['dedicated_area']
+                },
+                {
+                  "title" : "임대조건",
+                  "description" : welfare_info_house.iloc[0]['condition']
+                }
+              ],
+              "itemListAlignment": "left",
+              "buttons": [
+                {
+                  "label": "설명 보기",
+                  "action": "block",
+                  "blockId" : welfare_info_house.iloc[0]['describe']
+                },
+                {
+                  "label": "링크 연결",
+                  "action": "webLink",
+                  "webLinkUrl": "https://www.myhome.go.kr/hws/portal/cont/selectContRentalView.do#guide=RH112"
+                }
+              ]
+            },
+            {
+              "imageTitle": {
+                "title": "영구임대주택",
+                "imageUrl" : ""
+              },
+              "itemList": [
+                {
+                  "title": "설명",
+                  "description": welfare_info_house.iloc[1]['describe']
+                },
+                {
+                  "title": "임대기간",
+                  "description": welfare_info_house.iloc[1]['term']
+                },
+                {
+                  "title" : "전용면적",
+                  "description" : welfare_info_house.iloc[1]['dedicated_area']
+                },
+                {
+                  "title" : "임대조건",
+                  "description" : welfare_info_house.iloc[1]['condition']
+                }
+              ],
+              "itemListAlignment": "left",
+              "buttons": [
+                {
+                  "label": "설명 보기",
+                  "action": "message",
+                  "messageText" : welfare_info_house.iloc[1]['describe']
+                },
+                {
+                  "label": "링크 연결",
+                  "action": "webLink",
+                  "webLinkUrl": "https://www.myhome.go.kr/hws/portal/cont/selectContRentalView.do#guide=RH103"
+                }
+              ]
+            },
+            {
+              "imageTitle": {
+                "title": "국민임대주택",
+                "imageUrl" : ""
+              },
+              "itemList": [
+                {
+                  "title": "설명",
+                  "description": welfare_info_house.iloc[2]['describe']
+                },
+                {
+                  "title": "임대기간",
+                  "description": welfare_info_house.iloc[2]['term']
+                },
+                {
+                  "title" : "전용면적",
+                  "description" : welfare_info_house.iloc[2]['dedicated_area']
+                },
+                {
+                  "title" : "임대조건",
+                  "description" : welfare_info_house.iloc[2]['condition']
+                }
+              ],
+              "itemListAlignment": "left",
+              "buttons": [
+                {
+                  "label": "설명 보기",
+                  "action": "message",
+                  "messageText" : welfare_info_house.iloc[2]['describe']
+                },
+                {
+                  "label": "링크 연결",
+                  "action": "webLink",
+                  "webLinkUrl": "https://www.myhome.go.kr/hws/portal/cont/selectContRentalView.do#guide=RH104"
+                }
+              ]
+            },
+            {
+              "imageTitle": {
+                "title": "장기전세주택",
+                "imageUrl" : ""
+              },
+              "itemList": [
+                {
+                  "title": "설명",
+                  "description": welfare_info_house.iloc[9]['describe']
+                },
+                {
+                  "title": "임대기간",
+                  "description": welfare_info_house.iloc[9]['term']
+                },
+                {
+                  "title" : "전용면적",
+                  "description" : welfare_info_house.iloc[9]['dedicated_area']
+                },
+                {
+                  "title" : "임대조건",
+                  "description" : welfare_info_house.iloc[9]['condition']
+                }
+              ],
+              "itemListAlignment": "left",
+              "buttons": [
+                {
+                  "label": "설명 보기",
+                  "action": "message",
+                  "messageText" : welfare_info_house.iloc[9]['describe']
+                },
+                {
+                  "label": "링크 연결",
+                  "action": "webLink",
+                  "webLinkUrl": "https://www.myhome.go.kr/hws/portal/cont/selectContRentalView.do#guide=RH105"
+                }
+              ]
+            },
+            {
+              "imageTitle": {
+                "title": "공공임대주택",
+                "imageUrl" : ""
+              },
+              "itemList": [
+                {
+                  "title": "설명",
+                  "description": welfare_info_house.iloc[10]['describe']
+                },
+                {
+                  "title": "임대기간",
+                  "description": welfare_info_house.iloc[10]['term']
+                },
+                {
+                  "title" : "전용면적",
+                  "description" : welfare_info_house.iloc[10]['dedicated_area']
+                },
+                {
+                  "title" : "임대조건",
+                  "description" : welfare_info_house.iloc[10]['condition']
+                }
+              ],
+              "itemListAlignment": "left",
+              "buttons": [
+                {
+                  "label": "설명 보기",
+                  "action": "message",
+                  "messageText" : welfare_info_house.iloc[10]['describe']
+                },
+                {
+                  "label": "링크 연결",
+                  "action": "webLink",
+                  "webLinkUrl": "https://www.myhome.go.kr/hws/portal/cont/selectContRentalView.do#guide=RH106"
+                }
+              ]
+            },
+            {
+              "imageTitle": {
+                "title": "전세임대주택",
+                "imageUrl" : ""
+              },
+              "itemList": [
+                {
+                  "title": "설명",
+                  "description": welfare_info_house.iloc[3]['describe']
+                },
+                {
+                  "title": "임대기간",
+                  "description": welfare_info_house.iloc[3]['term']
+                },
+                {
+                  "title" : "전용면적",
+                  "description" : welfare_info_house.iloc[3]['dedicated_area']
+                },
+                {
+                  "title" : "임대조건",
+                  "description" : welfare_info_house.iloc[3]['condition']
+                }
+              ],
+              "itemListAlignment": "left",
+              "buttons": [
+                {
+                  "label": "설명 보기",
+                  "action": "message",
+                  "messageText" : welfare_info_house.iloc[3]['describe']
+                },
+                {
+                  "label": "링크 연결",
+                  "action": "webLink",
+                  "webLinkUrl": "https://www.myhome.go.kr/hws/portal/cont/selectContRentalView.do#guide=RH107"
+                }
+              ]
+            },
+            {
+              "imageTitle": {
+                "title": "행복주택",
+                "imageUrl" : ""
+              },
+              "itemList": [
+                {
+                  "title": "설명",
+                  "description": welfare_info_house.iloc[2]['describe']
+                },
+                {
+                  "title": "임대기간",
+                  "description": welfare_info_house.iloc[2]['term']
+                },
+                {
+                  "title" : "전용면적",
+                  "description" : welfare_info_house.iloc[2]['dedicated_area']
+                },
+                {
+                  "title" : "임대조건",
+                  "description" : welfare_info_house.iloc[2]['condition']
+                }
+              ],
+              "itemListAlignment": "left",
+              "buttons": [
+                {
+                  "label": "설명 보기",
+                  "action": "message",
+                  "messageText" : welfare_info_house.iloc[2]['describe']
+                },
+                {
+                  "label": "링크 연결",
+                  "action": "webLink",
+                  "webLinkUrl": "https://www.myhome.go.kr/hws/portal/cont/selectContRentalView.do#guide=RH108"
+                }
+              ]
+            },
+            {
+              "imageTitle": {
+                "title": "공공지원민간임대주택",
+                "imageUrl" : ""
+              },
+              "itemList": [
+                {
+                  "title": "설명",
+                  "description": welfare_info_house.iloc[6]['describe']
+                },
+                {
+                  "title": "임대기간",
+                  "description": welfare_info_house.iloc[6]['term']
+                },
+                {
+                  "title" : "전용면적",
+                  "description" : welfare_info_house.iloc[6]['dedicated_area']
+                },
+                {
+                  "title" : "임대조건",
+                  "description" : welfare_info_house.iloc[6]['condition']
+                }
+              ],
+              "itemListAlignment": "left",
+              "buttons": [
+                {
+                  "label": "설명 보기",
+                  "action": "message",
+                  "messageText" : welfare_info_house.iloc[6]['describe']
+                },
+                {
+                  "label": "링크 연결",
+                  "action": "webLink",
+                  "webLinkUrl": "https://www.myhome.go.kr/hws/portal/cont/selectContRentalView.do#guide=RH109"
+                }
+              ]
+            },
+            {
+              "imageTitle": {
+                "title": "주거복지동주택",
+                "imageUrl" : ""
+              },
+              "itemList": [
+                {
+                  "title": "설명",
+                  "description": welfare_info_house.iloc[7]['describe']
+                },
+                {
+                  "title": "임대기간",
+                  "description": welfare_info_house.iloc[7]['term']
+                },
+                {
+                  "title" : "전용면적",
+                  "description" : welfare_info_house.iloc[7]['dedicated_area']
+                },
+                {
+                  "title" : "임대조건",
+                  "description" : welfare_info_house.iloc[7]['condition']
+                }
+              ],
+              "itemListAlignment": "left",
+              "buttons": [
+                {
+                  "label": "설명 보기",
+                  "action": "message",
+                  "messageText" : welfare_info_house.iloc[7]['describe']
+                },
+                {
+                  "label": "링크 연결",
+                  "action": "webLink",
+                  "webLinkUrl": "https://www.myhome.go.kr/hws/portal/cont/selectContRentalView.do#guide=RH110"
+                }
+              ]
+            },
+            {
+              "imageTitle": {
+                "title": "공공기숙사",
+                "imageUrl" : ""
+              },
+              "itemList": [
+                {
+                  "title": "설명",
+                  "description": welfare_info_house.iloc[8]['describe']
+                },
+                {
+                  "title": "임대기간",
+                  "description": welfare_info_house.iloc[8]['term']
+                },
+                {
+                  "title" : "주거형태",
+                  "description" : welfare_info_house.iloc[8]['dedicated_area']
+                },
+                {
+                  "title" : "임대조건",
+                  "description" : welfare_info_house.iloc[8]['condition']
+                }
+              ],
+              "itemListAlignment": "left",
+              "buttons": [
+                {
+                  "label": "설명 보기",
+                  "action": "message",
+                  "messageText" : welfare_info_house.iloc[8]['describe']
+                },
+                {
+                  "label": "링크 연결",
+                  "action": "webLink",
+                  "webLinkUrl": "https://www.myhome.go.kr/hws/portal/cont/selectContRentalView.do#guide=RH111"
+                }
+              ]
+            },
+          ]
+        }
+      }
+    ],
+    "quickReplies": [
+      {
+        "messageText": "인기 메뉴",
+        "action": "message",
+        "label": "인기 메뉴"
+      },
+      {
+        "messageText": "최근 주문",
+        "action": "message",
+        "label": "최근 주문"
+      },
+      {
+        "messageText": "장바구니",
+        "action": "message",
+        "label": "장바구니"
+      }
+    ]
+  }
+}
+    
+    #답변 전송
+    return jsonify(res)
+
+if __name__ == "__main__":
+    application.run(host='0.0.0.0', port=5000, threaded=True)
