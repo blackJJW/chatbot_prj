@@ -1,0 +1,96 @@
+"""    
+    if welfare_type == '통합공공임대주택':
+        res = {
+    "version": "2.0",
+    "template": {
+        "outputs": [
+            {
+                "simpleText": {
+                    "text": welfare_type + '\n\n' + "원하시는 상세정보를 선택해주세요."
+                }
+            }
+        ],
+        "quickReplies": [
+                {
+                "label": "입주자격",
+                "action": "block",
+                "blockId": "628b0241bacfd86a3725d282",
+                "extra": {"welfare_type" : welfare_type}
+                },
+                {
+                "label": "소득·자산 산정방법",
+                "action": "block",
+                "blockId": "628b1ed4055a574d7df534ff",
+                "extra": {"welfare_type" : welfare_type}
+                },
+                {
+                "label": "일반 입주·선정방법",
+                "action": "block",
+                "blockId": "628b2f71055a574d7df5383d",
+                "extra": {"welfare_type" : welfare_type}
+                },
+                {
+                "label": "신청절차",
+                "action": "block",
+                "blockId": "628b38eb055a574d7df53a46",
+                "extra": {"welfare_type" : welfare_type}
+                },
+                {
+                "label": "주택복지",
+                "action": "block",
+                "blockId": "62859d5e33d26f492e9e84ed"
+                },
+                {
+                "label": "메인메뉴",
+                "action": "block",
+                "blockId": "62873757ee5923754330c0b2",
+                }
+                
+              ]
+            }
+    }
+    elif welfare_type == '영구임대주택':
+        res = {
+    "version": "2.0",
+    "template": {
+        "outputs": [
+            {
+                "simpleText": {
+                    "text": welfare_type + '\n\n' + "원하시는 상세정보를 선택해주세요."
+                }
+            }
+        ],
+        "quickReplies": [
+                {
+                "label": "입주자격",
+                "action": "block",
+                "blockId": "628b0241bacfd86a3725d282",
+                "extra": {"welfare_type" : welfare_type}
+                },
+                {
+                "label": "입주·선정순위",
+                "action": "block",
+                "blockId": "628b412f299dbd02ee7a6666",
+                "extra": {"welfare_type" : welfare_type}
+                },
+                {
+                "label": "신청절차",
+                "action": "block",
+                "blockId": "628b38eb055a574d7df53a46",
+                "extra": {"welfare_type" : welfare_type}
+                },
+                {
+                "label": "주택복지",
+                "action": "block",
+                "blockId": "62859d5e33d26f492e9e84ed"
+                },
+                {
+                "label": "메인메뉴",
+                "action": "block",
+                "blockId": "62873757ee5923754330c0b2",
+                }
+                
+            ]
+        }
+    }"""
+    
