@@ -22,14 +22,59 @@ def show_moving_in_qual_ranking():
         "outputs": [
             {
                 "simpleText": {
-                    "text": "■ 입주자격 및 입주자 선정방법" + "\n\n"
-                            + '♤ ' + str(moving_data.iloc[0]['rank']) + ' :' + '\n\n\t\t' + str(moving_data.iloc[0]['qualification']) + '\n\n\n'
-                                    + str(moving_data.iloc[0]['note'])
+                    "text": "■ 입주자격 및 선정순위" + "\n\n"
+                            + '♤ ' + str(moving_data.iloc[0]['rank']) + ' :' + '\n\n\t\t' + str(moving_data.iloc[0]['qualification']) + '\n\n'
+                            + str(moving_data.iloc[0]['note'])+ '\n\n\t\t'
+                            + '♤ ' + str(moving_data.iloc[1]['rank']) + ' :' + '\n\n\t\t' + str(moving_data.iloc[1]['qualification']) + '\n\n'
+                            + str(moving_data.iloc[1]['note'])+ '\n\n\t\t'
+                            + '♤ ' + str(moving_data.iloc[2]['rank']) + ' :' + '\n\n\t\t' + str(moving_data.iloc[2]['qualification']) + '\n\n'     
                 }
+            },
+            {
+        "basicCard": {
+          "title": "영구임대주택 링크",
+          "description": "자세한 사항은 링크 연결로...",
+          "thumbnail": {
+            "imageUrl": ""
+          },
+          "buttons": [
+            {
+              "label": "링크연결",
+              "action": "webLink",
+              "webLinkUrl": "https://www.myhome.go.kr/hws/portal/cont/selectContRentalView.do#guide=RH103"
             }
-        ]
+          ]
+        }
+            }
+        ],
+        "quickReplies": [
+                {
+                "label": "입주자격",
+                "action": "block",
+                "blockId": "628b0241bacfd86a3725d282",
+                "extra": {"welfare_type" : welfare_type}
+                },
+                {
+                "label": "신청절차",
+                "action": "block",
+                "blockId": "628b38eb055a574d7df53a46",
+                "extra": {"welfare_type" : welfare_type}
+                },
+                {
+                "label": "주택복지",
+                "action": "block",
+                "blockId": "62859d5e33d26f492e9e84ed"
+                },
+                {
+                "label": "메인메뉴",
+                "action": "block",
+                "blockId": "62873757ee5923754330c0b2",
+                }
+                
+            ]
     }
 }
+        
     return res
 
 @blue_house_welfare_detail.route("/apply_step", methods=['GET', 'POST'])
@@ -89,6 +134,67 @@ def show_apply_step():
                 "label": "일반 입주·선정방법",
                 "action": "block",
                 "blockId": "628b2f71055a574d7df5383d",
+                "extra": {"welfare_type" : welfare_type}
+                },
+                {
+                "label": "주택복지",
+                "action": "block",
+                "blockId": "62859d5e33d26f492e9e84ed"
+                },
+                {
+                "label": "메인메뉴",
+                "action": "block",
+                "blockId": "62873757ee5923754330c0b2",
+                }
+                
+            ]
+    }
+}
+    elif welfare_type == '영구임대주택':
+        step_data = pd.read_csv("./data/house_welfare/permanent_lease/apply_step.csv")
+        
+        res = {
+    "version": "2.0",
+    "template": {
+        "outputs": [
+            {
+                "simpleText": {
+                    "text": "■ 영구임대주택 신청절차" + "\n\n"
+                            + "1. " + str(step_data.iloc[0]['step']) + ' :' + '\n\t\t' + str(step_data.iloc[0]['describe']) + '\n\n'
+                            + "2. " + str(step_data.iloc[1]['step']) + ' :' + '\n\t\t' + str(step_data.iloc[1]['describe']) + '\n\n'
+                            + "3. " + str(step_data.iloc[2]['step']) + ' :' + '\n\t\t' + str(step_data.iloc[2]['describe']) + '\n\n'
+                            + "4. " + str(step_data.iloc[3]['step']) + ' :' + '\n\t\t' + str(step_data.iloc[3]['describe']) + '\n\n'
+                            + "5. " + str(step_data.iloc[4]['step']) + ' :' + '\n\t\t' + str(step_data.iloc[4]['describe'])
+                }
+            },
+            {
+        "basicCard": {
+          "title": "영구임대주택 링크",
+          "description": "자세한 사항은 링크 연결로...",
+          "thumbnail": {
+            "imageUrl": ""
+          },
+          "buttons": [
+            {
+              "label": "링크연결",
+              "action": "webLink",
+              "webLinkUrl": "https://www.myhome.go.kr/hws/portal/cont/selectContRentalView.do#guide=RH103"
+            }
+          ]
+        }
+            }
+        ],
+        "quickReplies": [
+                {
+                "label": "입주자격",
+                "action": "block",
+                "blockId": "628b0241bacfd86a3725d282",
+                "extra": {"welfare_type" : welfare_type}
+                },
+                {
+                "label": "입주·선정방법",
+                "action": "block",
+                "blockId": "628b412f299dbd02ee7a6666",
                 "extra": {"welfare_type" : welfare_type}
                 },
                 {
@@ -179,9 +285,8 @@ def show_general_supply_selection():
             ]
     }
 }
+        
     return res
-
-
 
 @blue_house_welfare_detail.route("/income_asset_how", methods=['GET', 'POST'])
 def show_income_asset_how():
@@ -482,7 +587,7 @@ def blue_house_welfare_detail_selection():
                 "extra": {"welfare_type" : welfare_type}
                 },
                 {
-                "label": "입주·선정방법",
+                "label": "입주·선정순위",
                 "action": "block",
                 "blockId": "628b412f299dbd02ee7a6666",
                 "extra": {"welfare_type" : welfare_type}
